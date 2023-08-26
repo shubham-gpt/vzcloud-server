@@ -1,0 +1,76 @@
+server:
+  port: 9999
+  servlet:
+    session:
+      timeout: 120m
+    context-path: /wgcloud
+#Log file output path
+logging:
+  file:
+    path: ./log
+# database Related settings
+spring:
+  application:
+    name: wgcloud-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wgcloud?characterEncoding=utf-8&characterSetResults=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+    username: root
+    password: 123456
+    # Hikari connecRelated settings pool parameters Related settings
+    hikari:
+      # Take timeout
+      validationTimeout: 3000
+      # Define the timeout oDefault 30s connection.Minimum 250ms,Default 30s
+      connectionTimeout: 60000
+      # Define the free time.Minimum 10s, default 10M
+      idleTimeout: 60000
+      #Define the smallest idle connection number.Recommended not set.Or consistent with the maximum number of connections; maintain a fixed number of connections
+      minimumIdle: 10
+      #Define the maximum number of connections.Default 10
+      maximumPoolSize: 10
+      # Define the maximum life cycle of connection.It is recommended to set this property.Minimum 30s, default 30M
+      maxLifeTime: 60000
+      # After the connection is obtained from the connection pool, the query sentence for inspection is performed.It is recommended to set this property.The default value is NONE
+      connectionTestQuery: select 1
+  mvc:
+    static-path-pattern: /static/**
+  thymeleaf:
+    cache: false
+#Mybatis configuration
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+#Custom configuration parameter
+base:
+  #Log in to account Admin's password
+  admindPwd: 111111
+  #Communication token, the agent side is consistent with this
+  wgToken: wgcloud
+  #Whether to open the public kanban, yes open, NO closed, the public view board page does not need to log in
+  dashView: yes
+  #Data table monitoring interval, unit millisecond, default 60 minutes
+  dbTableTimes: 3600000
+  #Service interface monitoring interval, unit in milliseconds, 10 minutes by default
+  heathTimes: 600000
+
+#Alarm configuration
+mail:
+  #Alarm mail total switch, yes open, NO closed
+  allWarnMail: yes
+  #Monitoring host memory usage%alarm value, exceeding this value, send email alarm
+  memWarnVal: 98
+  #Monitoring host CPU usage rate%alarm value, exceeding this value, send email alarm
+  cpuWarnVal: 98
+  #Memory alarm mail switch, yes open, NO closed.After the total switch is turned on, the settings will take effect here.The following switches follow this rule.
+  memWarnMail: yes
+  #CPU warning email switch, yes open, NO closed
+  cpuWarnMail: yes
+  #The host is offline alarm mail switch, yes open, NO closed
+  hostDownWarnMail: yes
+  #The process offline alarm email switch, yes open, NO closed
+  appDownWarnMail: yes
+  #Service interface alarm email switch, yes open, NO closed
+  heathWarnMail: yes
