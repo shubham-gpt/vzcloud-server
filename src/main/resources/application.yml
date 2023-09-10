@@ -15,7 +15,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/wgcloud?characterEncoding=utf-8&characterSetResults=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
     username: root
-    password:
+    password: test1234
     # Hikari connecRelated settings pool parameters Related settings
     hikari:
       # Take timeout
@@ -73,3 +73,9 @@ mail:
   appDownWarnMail: yes
   #Service interface alarm email switch, yes open, NO closed
   heathWarnMail: yes
+mqtt:
+  minTaskTopic: min-task
+  agentInfoTopic: agent-info
+  brokerUrl: tcp://185.183.182.195
+  userName:
+  password:
